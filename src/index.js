@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const crypto = require('crypto');
 const { getTalkers } = require('./functions/getTalkers');
 const { filterById } = require('./functions/filterById');
+const { validEmail, validPassword } = require('./functions/validateLogin');
 
 const app = express();
 app.use(bodyParser.json());
@@ -34,4 +36,10 @@ app.get('/talker/:id', async (request, response) => {
       .json({ message: 'Pessoa palestrante não encontrada' });
   }
   return response.status(200).json(filterTalker);
+});
+
+// rota para validar login e gerar um token
+app.post('/login', validEmail, validPassword, (_request, response) => {
+  const token = crypto.randomBytes(8).toString('hex');
+  return response.status(200).json({ token: `${token}` });
 });
