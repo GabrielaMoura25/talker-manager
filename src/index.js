@@ -4,6 +4,13 @@ const crypto = require('crypto');
 const { getTalkers } = require('./functions/getTalkers');
 const { filterById } = require('./functions/filterById');
 const { validEmail, validPassword } = require('./functions/validateLogin');
+const { validAge } = require('./middlewares/validAge');
+const { validName } = require('./middlewares/validName');
+const { validRate } = require('./middlewares/validRate');
+const { validWatchedAt } = require('./middlewares/validWatchedAt');
+const { validToken } = require('./middlewares/validToken');
+const { validTalker } = require('./middlewares/validTalker');
+const { updateTalker } = require('./middlewares/putTalkers');
 
 const app = express();
 app.use(bodyParser.json());
@@ -43,3 +50,13 @@ app.post('/login', validEmail, validPassword, (_request, response) => {
   const token = crypto.randomBytes(8).toString('hex');
   return response.status(200).json({ token: `${token}` });
 });
+
+app.use(validToken);
+
+// rota para cadastrar novo palestrante
+app.post('/talker', validToken, validName, validAge,
+validRate, validWatchedAt, validTalker, async () => {});
+
+// rota para alterar palestrante
+app.put('/talker/:id', validToken, validName, validAge, 
+validRate, validWatchedAt, updateTalker, async () => {});
