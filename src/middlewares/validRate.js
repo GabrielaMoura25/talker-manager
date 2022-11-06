@@ -1,5 +1,5 @@
 const nullRate = (rate) => {
-    if (!rate || rate === '' || rate === null) { return true; }
+    if (!rate && rate !== 0) { return true; }
     return false;
 };
 
