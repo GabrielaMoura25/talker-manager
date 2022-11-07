@@ -11,6 +11,7 @@ const { validWatchedAt } = require('./middlewares/validWatchedAt');
 const { validToken } = require('./middlewares/validToken');
 const { validTalker } = require('./middlewares/validTalker');
 const { updateTalker } = require('./middlewares/putTalkers');
+const { deleteTalker } = require('./middlewares/deleteTalker');
 
 const app = express();
 app.use(bodyParser.json());
@@ -60,3 +61,6 @@ validRate, validWatchedAt, validTalker, async () => {});
 // rota para alterar palestrante
 app.put('/talker/:id', validToken, validName, validAge, 
 validRate, validWatchedAt, updateTalker, async () => {});
+
+// rota para deletar os palestrantes
+app.delete('/talker/:id', validToken, deleteTalker, async () => {});
