@@ -11,7 +11,7 @@ const deleteTalker = async (request, response) => {
     dataBaseTalker = dataBaseTalker.filter((talker) => talker.id !== parseInt(removeId, 10));
 
     await fs.writeFile(TALKERS_FILE, JSON.stringify(dataBaseTalker));
-    return response.status(204).json({ message: 'Pessoa palestrante deletada com sucesso' });
+    return response.status(204).json();
 };
 
 module.exports = { deleteTalker };

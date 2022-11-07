@@ -12,6 +12,7 @@ const { validToken } = require('./middlewares/validToken');
 const { validTalker } = require('./middlewares/validTalker');
 const { updateTalker } = require('./middlewares/putTalkers');
 const { deleteTalker } = require('./middlewares/deleteTalker');
+const { searchTalker } = require('./middlewares/searchTalker');
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,6 +24,9 @@ const PORT = '3000';
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
+
+// rota para encontrar termos por search
+app.get('/talker/search', validToken, searchTalker, async () => {});
 
 app.listen(PORT, () => {
   console.log('Online');
