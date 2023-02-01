@@ -27,6 +27,18 @@ Navegue até a raíz do projeto.
 
       cd talker-manager/
 
+Instale as dependências e inicialize o projeto.
+
+      npm install
+
+Entre no VsCode para verificar os arquivos usando o atalho no terminal.
+
+      code .
+
+Para iniciar o projeto, execute o comando:
+
+      npm start
+
 <details>
    <summary><strong>Rodando a aplicação com o Docker</strong></summary>
   </br>
